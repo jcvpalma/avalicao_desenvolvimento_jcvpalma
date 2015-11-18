@@ -1,0 +1,14 @@
+c:\users\jcvpalma\documents\visual studio 2013\Projects\AvaliacaoDesenv\AD_ContractRepos\bin\Debug\AD_ContractRepos.dll.config
+c:\users\jcvpalma\documents\visual studio 2013\Projects\AvaliacaoDesenv\AD_ContractRepos\bin\Debug\AD_ContractRepos.dll
+c:\users\jcvpalma\documents\visual studio 2013\Projects\AvaliacaoDesenv\AD_ContractRepos\bin\Debug\AD_ContractRepos.pdb
+c:\users\jcvpalma\documents\visual studio 2013\Projects\AvaliacaoDesenv\AD_ContractRepos\bin\Debug\AD_BussinessEF.dll
+c:\users\jcvpalma\documents\visual studio 2013\Projects\AvaliacaoDesenv\AD_ContractRepos\bin\Debug\AD_Repositories.dll
+c:\users\jcvpalma\documents\visual studio 2013\Projects\AvaliacaoDesenv\AD_ContractRepos\bin\Debug\EntityFramework.dll
+c:\users\jcvpalma\documents\visual studio 2013\Projects\AvaliacaoDesenv\AD_ContractRepos\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\jcvpalma\documents\visual studio 2013\Projects\AvaliacaoDesenv\AD_ContractRepos\bin\Debug\AD_BussinessEF.pdb
+c:\users\jcvpalma\documents\visual studio 2013\Projects\AvaliacaoDesenv\AD_ContractRepos\bin\Debug\AD_Repositories.pdb
+c:\users\jcvpalma\documents\visual studio 2013\Projects\AvaliacaoDesenv\AD_ContractRepos\bin\Debug\EntityFramework.xml
+c:\users\jcvpalma\documents\visual studio 2013\Projects\AvaliacaoDesenv\AD_ContractRepos\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\jcvpalma\documents\visual studio 2013\Projects\AvaliacaoDesenv\AD_ContractRepos\obj\Debug\AD_ContractRepos.csprojResolveAssemblyReference.cache
+c:\users\jcvpalma\documents\visual studio 2013\Projects\AvaliacaoDesenv\AD_ContractRepos\obj\Debug\AD_ContractRepos.dll
+c:\users\jcvpalma\documents\visual studio 2013\Projects\AvaliacaoDesenv\AD_ContractRepos\obj\Debug\AD_ContractRepos.pdb

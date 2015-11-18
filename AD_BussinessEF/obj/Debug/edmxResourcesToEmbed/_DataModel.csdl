@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="DataModelContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Comprador" EntityType="DataModel.Comprador" />
+    <EntitySet Name="Compras" EntityType="DataModel.Compras" />
+    <EntitySet Name="Fornecedor" EntityType="DataModel.Fornecedor" />
+    <EntitySet Name="Produto" EntityType="DataModel.Produto" />
+    <AssociationSet Name="CompradorCompras" Association="DataModel.CompradorCompras">
+      <End Role="Comprador" EntitySet="Comprador" />
+      <End Role="Compras" EntitySet="Compras" />
+    </AssociationSet>
+    <AssociationSet Name="FornecedorProduto" Association="DataModel.FornecedorProduto">
+      <End Role="Fornecedor" EntitySet="Fornecedor" />
+      <End Role="Produto" EntitySet="Produto" />
+    </AssociationSet>
+    <EntitySet Name="DetalheCompras" EntityType="DataModel.DetalheCompras" />
+    <AssociationSet Name="ComprasDetalheCompras" Association="DataModel.ComprasDetalheCompras">
+      <End Role="Compras" EntitySet="Compras" />
+      <End Role="DetalheCompras" EntitySet="DetalheCompras" />
+    </AssociationSet>
+    <AssociationSet Name="DetalheComprasProduto" Association="DataModel.DetalheComprasProduto">
+      <End Role="DetalheCompras" EntitySet="DetalheCompras" />
+      <End Role="Produto" EntitySet="Produto" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Comprador">
+    <Key>
+      <PropertyRef Name="IdCoprador" />
+    </Key>
+    <Property Name="IdCoprador" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NomeComprador" Type="String" Nullable="false" />
+    <NavigationProperty Name="Compras" Relationship="DataModel.CompradorCompras" FromRole="Comprador" ToRole="Compras" />
+  </EntityType>
+  <EntityType Name="Compras">
+    <Key>
+      <PropertyRef Name="IdCompra" />
+    </Key>
+    <Property Name="IdCompra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Comprador" Relationship="DataModel.CompradorCompras" FromRole="Compras" ToRole="Comprador" />
+    <Property Name="CompradorIdCoprador" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DetalheCompras" Relationship="DataModel.ComprasDetalheCompras" FromRole="Compras" ToRole="DetalheCompras" />
+  </EntityType>
+  <EntityType Name="Fornecedor">
+    <Key>
+      <PropertyRef Name="IdFornecedor" />
+    </Key>
+    <Property Name="IdFornecedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NomeFornecedor" Type="String" Nullable="false" />
+    <NavigationProperty Name="Produto" Relationship="DataModel.FornecedorProduto" FromRole="Fornecedor" ToRole="Produto" />
+  </EntityType>
+  <EntityType Name="Produto">
+    <Key>
+      <PropertyRef Name="IdProduto" />
+    </Key>
+    <Property Name="IdProduto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DescricaoProduto" Type="String" Nullable="false" />
+    <NavigationProperty Name="Fornecedor" Relationship="DataModel.FornecedorProduto" FromRole="Produto" ToRole="Fornecedor" />
+    <Property Name="FornecedorIdFornecedor" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DetalheCompras" Relationship="DataModel.DetalheComprasProduto" FromRole="Produto" ToRole="DetalheCompras" />
+    <Property Name="DetalheComprasIdDetalheCompra" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="CompradorCompras">
+    <End Type="DataModel.Comprador" Role="Comprador" Multiplicity="1" />
+    <End Type="DataModel.Compras" Role="Compras" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Comprador">
+        <PropertyRef Name="IdCoprador" />
+      </Principal>
+      <Dependent Role="Compras">
+        <PropertyRef Name="CompradorIdCoprador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FornecedorProduto">
+    <End Type="DataModel.Fornecedor" Role="Fornecedor" Multiplicity="1" />
+    <End Type="DataModel.Produto" Role="Produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fornecedor">
+        <PropertyRef Name="IdFornecedor" />
+      </Principal>
+      <Dependent Role="Produto">
+        <PropertyRef Name="FornecedorIdFornecedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="DetalheCompras">
+    <Key>
+      <PropertyRef Name="IdDetalheCompra" />
+    </Key>
+    <Property Name="IdDetalheCompra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Compras" Relationship="DataModel.ComprasDetalheCompras" FromRole="DetalheCompras" ToRole="Compras" />
+    <Property Name="ComprasIdCompra" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Produto" Relationship="DataModel.DetalheComprasProduto" FromRole="DetalheCompras" ToRole="Produto" />
+  </EntityType>
+  <Association Name="ComprasDetalheCompras">
+    <End Type="DataModel.Compras" Role="Compras" Multiplicity="1" />
+    <End Type="DataModel.DetalheCompras" Role="DetalheCompras" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Compras">
+        <PropertyRef Name="IdCompra" />
+      </Principal>
+      <Dependent Role="DetalheCompras">
+        <PropertyRef Name="ComprasIdCompra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DetalheComprasProduto">
+    <End Type="DataModel.DetalheCompras" Role="DetalheCompras" Multiplicity="1" />
+    <End Type="DataModel.Produto" Role="Produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DetalheCompras">
+        <PropertyRef Name="IdDetalheCompra" />
+      </Principal>
+      <Dependent Role="Produto">
+        <PropertyRef Name="DetalheComprasIdDetalheCompra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

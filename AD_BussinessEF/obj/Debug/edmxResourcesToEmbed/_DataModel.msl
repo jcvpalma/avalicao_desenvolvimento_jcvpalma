@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DataModelStoreContainer" CdmEntityContainer="DataModelContainer">
+    <EntitySetMapping Name="Comprador">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Comprador)">
+        <MappingFragment StoreEntitySet="Comprador">
+          <ScalarProperty Name="IdCoprador" ColumnName="IdCoprador" />
+          <ScalarProperty Name="NomeComprador" ColumnName="NomeComprador" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Compras">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Compras)">
+        <MappingFragment StoreEntitySet="Compras">
+          <ScalarProperty Name="IdCompra" ColumnName="IdCompra" />
+          <ScalarProperty Name="CompradorIdCoprador" ColumnName="CompradorIdCoprador" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fornecedor">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Fornecedor)">
+        <MappingFragment StoreEntitySet="Fornecedor">
+          <ScalarProperty Name="IdFornecedor" ColumnName="IdFornecedor" />
+          <ScalarProperty Name="NomeFornecedor" ColumnName="NomeFornecedor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Produto">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Produto)">
+        <MappingFragment StoreEntitySet="Produto">
+          <ScalarProperty Name="IdProduto" ColumnName="IdProduto" />
+          <ScalarProperty Name="DescricaoProduto" ColumnName="DescricaoProduto" />
+          <ScalarProperty Name="FornecedorIdFornecedor" ColumnName="FornecedorIdFornecedor" />
+          <ScalarProperty Name="DetalheComprasIdDetalheCompra" ColumnName="DetalheComprasIdDetalheCompra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalheCompras">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.DetalheCompras)">
+        <MappingFragment StoreEntitySet="DetalheCompras">
+          <ScalarProperty Name="IdDetalheCompra" ColumnName="IdDetalheCompra" />
+          <ScalarProperty Name="ComprasIdCompra" ColumnName="ComprasIdCompra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

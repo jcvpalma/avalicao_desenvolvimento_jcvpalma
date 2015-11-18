@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DataModelStoreContainer">
+    <EntitySet Name="Comprador" EntityType="DataModel.Store.Comprador" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Compras" EntityType="DataModel.Store.Compras" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Fornecedor" EntityType="DataModel.Store.Fornecedor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Produto" EntityType="DataModel.Store.Produto" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DetalheCompras" EntityType="DataModel.Store.DetalheCompras" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CompradorCompras" Association="DataModel.Store.CompradorCompras">
+      <End Role="Comprador" EntitySet="Comprador" />
+      <End Role="Compras" EntitySet="Compras" />
+    </AssociationSet>
+    <AssociationSet Name="FornecedorProduto" Association="DataModel.Store.FornecedorProduto">
+      <End Role="Fornecedor" EntitySet="Fornecedor" />
+      <End Role="Produto" EntitySet="Produto" />
+    </AssociationSet>
+    <AssociationSet Name="ComprasDetalheCompras" Association="DataModel.Store.ComprasDetalheCompras">
+      <End Role="Compras" EntitySet="Compras" />
+      <End Role="DetalheCompras" EntitySet="DetalheCompras" />
+    </AssociationSet>
+    <AssociationSet Name="DetalheComprasProduto" Association="DataModel.Store.DetalheComprasProduto">
+      <End Role="DetalheCompras" EntitySet="DetalheCompras" />
+      <End Role="Produto" EntitySet="Produto" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Comprador">
+    <Key>
+      <PropertyRef Name="IdCoprador" />
+    </Key>
+    <Property Name="IdCoprador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NomeComprador" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Compras">
+    <Key>
+      <PropertyRef Name="IdCompra" />
+    </Key>
+    <Property Name="IdCompra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompradorIdCoprador" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Fornecedor">
+    <Key>
+      <PropertyRef Name="IdFornecedor" />
+    </Key>
+    <Property Name="IdFornecedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NomeFornecedor" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Produto">
+    <Key>
+      <PropertyRef Name="IdProduto" />
+    </Key>
+    <Property Name="IdProduto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DescricaoProduto" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FornecedorIdFornecedor" Type="int" Nullable="false" />
+    <Property Name="DetalheComprasIdDetalheCompra" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DetalheCompras">
+    <Key>
+      <PropertyRef Name="IdDetalheCompra" />
+    </Key>
+    <Property Name="IdDetalheCompra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ComprasIdCompra" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="CompradorCompras">
+    <End Role="Comprador" Type="DataModel.Store.Comprador" Multiplicity="1" />
+    <End Role="Compras" Type="DataModel.Store.Compras" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Comprador">
+        <PropertyRef Name="IdCoprador" />
+      </Principal>
+      <Dependent Role="Compras">
+        <PropertyRef Name="CompradorIdCoprador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FornecedorProduto">
+    <End Role="Fornecedor" Type="DataModel.Store.Fornecedor" Multiplicity="1" />
+    <End Role="Produto" Type="DataModel.Store.Produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fornecedor">
+        <PropertyRef Name="IdFornecedor" />
+      </Principal>
+      <Dependent Role="Produto">
+        <PropertyRef Name="FornecedorIdFornecedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ComprasDetalheCompras">
+    <End Role="Compras" Type="DataModel.Store.Compras" Multiplicity="1" />
+    <End Role="DetalheCompras" Type="DataModel.Store.DetalheCompras" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Compras">
+        <PropertyRef Name="IdCompra" />
+      </Principal>
+      <Dependent Role="DetalheCompras">
+        <PropertyRef Name="ComprasIdCompra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DetalheComprasProduto">
+    <End Role="DetalheCompras" Type="DataModel.Store.DetalheCompras" Multiplicity="1" />
+    <End Role="Produto" Type="DataModel.Store.Produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DetalheCompras">
+        <PropertyRef Name="IdDetalheCompra" />
+      </Principal>
+      <Dependent Role="Produto">
+        <PropertyRef Name="DetalheComprasIdDetalheCompra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="DataModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Comprador" EntityType="DataModel.Comprador" />
+          <EntitySet Name="Compras" EntityType="DataModel.Compras" />
+          <EntitySet Name="Fornecedor" EntityType="DataModel.Fornecedor" />
+          <EntitySet Name="Produto" EntityType="DataModel.Produto" />
+          <AssociationSet Name="CompradorCompras" Association="DataModel.CompradorCompras">
+            <End Role="Comprador" EntitySet="Comprador" />
+            <End Role="Compras" EntitySet="Compras" />
+          </AssociationSet>
+          <AssociationSet Name="FornecedorProduto" Association="DataModel.FornecedorProduto">
+            <End Role="Fornecedor" EntitySet="Fornecedor" />
+            <End Role="Produto" EntitySet="Produto" />
+          </AssociationSet>
+          <EntitySet Name="DetalheCompras" EntityType="DataModel.DetalheCompras" />
+          <AssociationSet Name="ComprasDetalheCompras" Association="DataModel.ComprasDetalheCompras">
+            <End Role="Compras" EntitySet="Compras" />
+            <End Role="DetalheCompras" EntitySet="DetalheCompras" />
+          </AssociationSet>
+          <AssociationSet Name="DetalheComprasProduto" Association="DataModel.DetalheComprasProduto">
+            <End Role="DetalheCompras" EntitySet="DetalheCompras" />
+            <End Role="Produto" EntitySet="Produto" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Comprador">
+          <Key>
+            <PropertyRef Name="IdCoprador" />
+          </Key>
+          <Property Name="IdCoprador" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeComprador" Type="String" Nullable="false" />
+          <NavigationProperty Name="Compras" Relationship="DataModel.CompradorCompras" FromRole="Comprador" ToRole="Compras" />
+        </EntityType>
+        <EntityType Name="Compras">
+          <Key>
+            <PropertyRef Name="IdCompra" />
+          </Key>
+          <Property Name="IdCompra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Comprador" Relationship="DataModel.CompradorCompras" FromRole="Compras" ToRole="Comprador" />
+          <Property Name="CompradorIdCoprador" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DetalheCompras" Relationship="DataModel.ComprasDetalheCompras" FromRole="Compras" ToRole="DetalheCompras" />
+        </EntityType>
+        <EntityType Name="Fornecedor">
+          <Key>
+            <PropertyRef Name="IdFornecedor" />
+          </Key>
+          <Property Name="IdFornecedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeFornecedor" Type="String" Nullable="false" />
+          <NavigationProperty Name="Produto" Relationship="DataModel.FornecedorProduto" FromRole="Fornecedor" ToRole="Produto" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="IdProduto" />
+          </Key>
+          <Property Name="IdProduto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DescricaoProduto" Type="String" Nullable="false" />
+          <NavigationProperty Name="Fornecedor" Relationship="DataModel.FornecedorProduto" FromRole="Produto" ToRole="Fornecedor" />
+          <Property Name="FornecedorIdFornecedor" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DetalheCompras" Relationship="DataModel.DetalheComprasProduto" FromRole="Produto" ToRole="DetalheCompras" />
+          <Property Name="DetalheComprasIdDetalheCompra" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="CompradorCompras">
+          <End Type="DataModel.Comprador" Role="Comprador" Multiplicity="1" />
+          <End Type="DataModel.Compras" Role="Compras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comprador">
+              <PropertyRef Name="IdCoprador" />
+            </Principal>
+            <Dependent Role="Compras">
+              <PropertyRef Name="CompradorIdCoprador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FornecedorProduto">
+          <End Type="DataModel.Fornecedor" Role="Fornecedor" Multiplicity="1" />
+          <End Type="DataModel.Produto" Role="Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fornecedor">
+              <PropertyRef Name="IdFornecedor" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="FornecedorIdFornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DetalheCompras">
+          <Key>
+            <PropertyRef Name="IdDetalheCompra" />
+          </Key>
+          <Property Name="IdDetalheCompra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Compras" Relationship="DataModel.ComprasDetalheCompras" FromRole="DetalheCompras" ToRole="Compras" />
+          <Property Name="ComprasIdCompra" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Produto" Relationship="DataModel.DetalheComprasProduto" FromRole="DetalheCompras" ToRole="Produto" />
+        </EntityType>
+        <Association Name="ComprasDetalheCompras">
+          <End Type="DataModel.Compras" Role="Compras" Multiplicity="1" />
+          <End Type="DataModel.DetalheCompras" Role="DetalheCompras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compras">
+              <PropertyRef Name="IdCompra" />
+            </Principal>
+            <Dependent Role="DetalheCompras">
+              <PropertyRef Name="ComprasIdCompra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DetalheComprasProduto">
+          <End Type="DataModel.DetalheCompras" Role="DetalheCompras" Multiplicity="1" />
+          <End Type="DataModel.Produto" Role="Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetalheCompras">
+              <PropertyRef Name="IdDetalheCompra" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="DetalheComprasIdDetalheCompra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DataModelStoreContainer" CdmEntityContainer="DataModelContainer">
+    <EntitySetMapping Name="Comprador">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Comprador)">
+        <MappingFragment StoreEntitySet="Comprador">
+          <ScalarProperty Name="IdCoprador" ColumnName="IdCoprador" />
+          <ScalarProperty Name="NomeComprador" ColumnName="NomeComprador" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Compras">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Compras)">
+        <MappingFragment StoreEntitySet="Compras">
+          <ScalarProperty Name="IdCompra" ColumnName="IdCompra" />
+          <ScalarProperty Name="CompradorIdCoprador" ColumnName="CompradorIdCoprador" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fornecedor">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Fornecedor)">
+        <MappingFragment StoreEntitySet="Fornecedor">
+          <ScalarProperty Name="IdFornecedor" ColumnName="IdFornecedor" />
+          <ScalarProperty Name="NomeFornecedor" ColumnName="NomeFornecedor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Produto">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Produto)">
+        <MappingFragment StoreEntitySet="Produto">
+          <ScalarProperty Name="IdProduto" ColumnName="IdProduto" />
+          <ScalarProperty Name="DescricaoProduto" ColumnName="DescricaoProduto" />
+          <ScalarProperty Name="FornecedorIdFornecedor" ColumnName="FornecedorIdFornecedor" />
+          <ScalarProperty Name="DetalheComprasIdDetalheCompra" ColumnName="DetalheComprasIdDetalheCompra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalheCompras">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.DetalheCompras)">
+        <MappingFragment StoreEntitySet="DetalheCompras">
+          <ScalarProperty Name="IdDetalheCompra" ColumnName="IdDetalheCompra" />
+          <ScalarProperty Name="ComprasIdCompra" ColumnName="ComprasIdCompra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
