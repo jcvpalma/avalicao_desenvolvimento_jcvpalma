@@ -124,6 +124,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Model\FornecedorDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +151,10 @@
     <ProjectReference Include="..\AD_ContractRepos\AD_ContractRepos.csproj">
       <Project>{66f3d1c3-d0b5-4eb4-ae1e-fcf36137f23a}</Project>
       <Name>AD_ContractRepos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AD_Repositories\AD_Repositories.csproj">
+      <Project>{a2342ae3-f553-4c3c-ae97-63c09ed62201}</Project>
+      <Name>AD_Repositories</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

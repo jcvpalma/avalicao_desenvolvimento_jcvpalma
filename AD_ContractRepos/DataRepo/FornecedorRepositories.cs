@@ -9,7 +9,7 @@ using AD_Repositories;
 
 namespace AD_ContractRepos.DataRepo
 {
-    class FornecedorRepositories : Repositorie<DataModelContainer, Fornecedor>
+    public class FornecedorRepositories : Repositorie<DataModelContainer, Fornecedor>
     {
     }
 }
