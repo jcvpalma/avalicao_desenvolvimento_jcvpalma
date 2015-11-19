@@ -15,9 +15,34 @@ namespace AvaliacaoDesenv.Controllers
         }
 
         [HttpPost()]
-        public ActionResult Salvar()
+        public ActionResult Salvar(HttpPostedFileBase file)
         {
-            return RedirectToAction("Index");
+
+            if (Request.IsAjaxRequest())
+            {
+                var sValores = String.Empty;
+                var oFile = Request.Files["oFile"];
+                string line;
+
+
+                using (System.IO.StreamReader read = new System.IO.StreamReader(oFile.InputStream))
+                {
+                    while ((line = read.ReadLine()) != null)
+                    {
+                        sValores += line.Replace("\t","|");
+                    }
+                }
+
+                ViewData["valores"] = sValores;
+
+                return Json(ViewData);
+            }
+            else
+            {
+                return View();
+            }
+            
+            
         }
 
     }
