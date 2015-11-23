@@ -41,6 +41,5 @@ C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AD_BussinessEF\bin\Debug\System.Web.WebPages.xml
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AD_BussinessEF\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AD_BussinessEF\bin\Debug\System.Web.WebPages.Razor.xml
-C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AD_BussinessEF\obj\Debug\AD_BussinessEF.csprojResolveAssemblyReference.cache
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AD_BussinessEF\obj\Debug\AD_BussinessEF.dll
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AD_BussinessEF\obj\Debug\AD_BussinessEF.pdb

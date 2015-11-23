@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataRepo\CompradorRepositories.cs" />
     <Compile Include="DataRepo\DetalheComprasRepositories.cs" />
     <Compile Include="DataRepo\ComprasRepositories.cs" />
     <Compile Include="DataRepo\FornecedorRepositories.cs" />

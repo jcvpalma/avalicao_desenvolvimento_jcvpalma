@@ -124,7 +124,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Model\CompradorDAO.cs" />
+    <Compile Include="Model\ComprasDAO.cs" />
+    <Compile Include="Model\DetalheComprasDAO.cs" />
     <Compile Include="Model\FornecedorDAO.cs" />
+    <Compile Include="Model\ProdutoDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
