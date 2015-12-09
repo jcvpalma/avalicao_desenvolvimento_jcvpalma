@@ -61,7 +61,15 @@ namespace AvaliacaoDesenv.Controllers
                             var oComprador = new CompradorDAO(new CompradorRepositories());
                             var existComprador = oComprador.existsComprador(comprador);
 
-
+                            if (existComprador == false)
+                            {
+                                Comprador novoComprador = new Comprador();
+                                novoComprador.NomeComprador = comprador;
+                                if (!oComprador.Salvar(novoComprador))
+                                {
+                                    throw new Exception("Nao foi possivel salvar o comprador!");
+                                }
+                            }
 
                             #endregion
                         }

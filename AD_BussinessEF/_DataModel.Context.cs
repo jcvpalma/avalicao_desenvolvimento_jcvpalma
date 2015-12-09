@@ -25,10 +25,10 @@ namespace AD_BussinessEF
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Comprador> Comprador { get; set; }
         public virtual DbSet<Compras> Compras { get; set; }
+        public virtual DbSet<DetalheCompras> DetalheCompras { get; set; }
         public virtual DbSet<Fornecedor> Fornecedor { get; set; }
         public virtual DbSet<Produto> Produto { get; set; }
-        public virtual DbSet<DetalheCompras> DetalheCompras { get; set; }
+        public virtual DbSet<Comprador> Comprador { get; set; }
     }
 }

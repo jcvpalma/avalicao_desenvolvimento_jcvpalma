@@ -1,98 +1,74 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
   <EntityContainer Name="DataModelContainer" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Comprador" EntityType="DataModel.Comprador" />
     <EntitySet Name="Compras" EntityType="DataModel.Compras" />
+    <EntitySet Name="DetalheCompras" EntityType="DataModel.DetalheCompras" />
     <EntitySet Name="Fornecedor" EntityType="DataModel.Fornecedor" />
     <EntitySet Name="Produto" EntityType="DataModel.Produto" />
-    <AssociationSet Name="CompradorCompras" Association="DataModel.CompradorCompras">
-      <End Role="Comprador" EntitySet="Comprador" />
+    <EntitySet Name="Comprador" EntityType="DataModel.Comprador" />
+    <AssociationSet Name="FK_ComprasDetalheCompras" Association="DataModel.FK_ComprasDetalheCompras">
       <End Role="Compras" EntitySet="Compras" />
+      <End Role="DetalheCompras" EntitySet="DetalheCompras" />
     </AssociationSet>
-    <AssociationSet Name="FornecedorProduto" Association="DataModel.FornecedorProduto">
+    <AssociationSet Name="FK_DetalheComprasProduto" Association="DataModel.FK_DetalheComprasProduto">
+      <End Role="DetalheCompras" EntitySet="DetalheCompras" />
+      <End Role="Produto" EntitySet="Produto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FornecedorProduto" Association="DataModel.FK_FornecedorProduto">
       <End Role="Fornecedor" EntitySet="Fornecedor" />
       <End Role="Produto" EntitySet="Produto" />
     </AssociationSet>
-    <EntitySet Name="DetalheCompras" EntityType="DataModel.DetalheCompras" />
-    <AssociationSet Name="ComprasDetalheCompras" Association="DataModel.ComprasDetalheCompras">
+    <AssociationSet Name="ComprasComprador" Association="DataModel.ComprasComprador">
       <End Role="Compras" EntitySet="Compras" />
-      <End Role="DetalheCompras" EntitySet="DetalheCompras" />
-    </AssociationSet>
-    <AssociationSet Name="DetalheComprasProduto" Association="DataModel.DetalheComprasProduto">
-      <End Role="DetalheCompras" EntitySet="DetalheCompras" />
-      <End Role="Produto" EntitySet="Produto" />
+      <End Role="Comprador" EntitySet="Comprador" />
     </AssociationSet>
   </EntityContainer>
-  <EntityType Name="Comprador">
-    <Key>
-      <PropertyRef Name="IdCoprador" />
-    </Key>
-    <Property Name="IdCoprador" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="NomeComprador" Type="String" Nullable="false" />
-    <NavigationProperty Name="Compras" Relationship="DataModel.CompradorCompras" FromRole="Comprador" ToRole="Compras" />
-  </EntityType>
   <EntityType Name="Compras">
     <Key>
       <PropertyRef Name="IdCompra" />
     </Key>
     <Property Name="IdCompra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <NavigationProperty Name="Comprador" Relationship="DataModel.CompradorCompras" FromRole="Compras" ToRole="Comprador" />
-    <Property Name="CompradorIdCoprador" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="DetalheCompras" Relationship="DataModel.ComprasDetalheCompras" FromRole="Compras" ToRole="DetalheCompras" />
+    <NavigationProperty Name="DetalheCompras" Relationship="DataModel.FK_ComprasDetalheCompras" FromRole="Compras" ToRole="DetalheCompras" />
+    <NavigationProperty Name="Comprador" Relationship="DataModel.ComprasComprador" FromRole="Compras" ToRole="Comprador" />
+    <Property Name="ComprasIdComprador" Type="String" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DetalheCompras">
+    <Key>
+      <PropertyRef Name="IdDetalheCompra" />
+    </Key>
+    <Property Name="IdDetalheCompra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ComprasIdCompra" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Compras" Relationship="DataModel.FK_ComprasDetalheCompras" FromRole="DetalheCompras" ToRole="Compras" />
+    <NavigationProperty Name="Produto" Relationship="DataModel.FK_DetalheComprasProduto" FromRole="DetalheCompras" ToRole="Produto" />
   </EntityType>
   <EntityType Name="Fornecedor">
     <Key>
       <PropertyRef Name="IdFornecedor" />
     </Key>
     <Property Name="IdFornecedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="NomeFornecedor" Type="String" Nullable="false" />
-    <NavigationProperty Name="Produto" Relationship="DataModel.FornecedorProduto" FromRole="Fornecedor" ToRole="Produto" />
+    <Property Name="NomeFornecedor" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Produto" Relationship="DataModel.FK_FornecedorProduto" FromRole="Fornecedor" ToRole="Produto" />
   </EntityType>
   <EntityType Name="Produto">
     <Key>
       <PropertyRef Name="IdProduto" />
     </Key>
     <Property Name="IdProduto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="DescricaoProduto" Type="String" Nullable="false" />
-    <NavigationProperty Name="Fornecedor" Relationship="DataModel.FornecedorProduto" FromRole="Produto" ToRole="Fornecedor" />
+    <Property Name="DescricaoProduto" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="FornecedorIdFornecedor" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="DetalheCompras" Relationship="DataModel.DetalheComprasProduto" FromRole="Produto" ToRole="DetalheCompras" />
     <Property Name="DetalheComprasIdDetalheCompra" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DetalheCompras" Relationship="DataModel.FK_DetalheComprasProduto" FromRole="Produto" ToRole="DetalheCompras" />
+    <NavigationProperty Name="Fornecedor" Relationship="DataModel.FK_FornecedorProduto" FromRole="Produto" ToRole="Fornecedor" />
   </EntityType>
-  <Association Name="CompradorCompras">
-    <End Type="DataModel.Comprador" Role="Comprador" Multiplicity="1" />
-    <End Type="DataModel.Compras" Role="Compras" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Comprador">
-        <PropertyRef Name="IdCoprador" />
-      </Principal>
-      <Dependent Role="Compras">
-        <PropertyRef Name="CompradorIdCoprador" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FornecedorProduto">
-    <End Type="DataModel.Fornecedor" Role="Fornecedor" Multiplicity="1" />
-    <End Type="DataModel.Produto" Role="Produto" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Fornecedor">
-        <PropertyRef Name="IdFornecedor" />
-      </Principal>
-      <Dependent Role="Produto">
-        <PropertyRef Name="FornecedorIdFornecedor" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="DetalheCompras">
+  <EntityType Name="Comprador">
     <Key>
-      <PropertyRef Name="IdDetalheCompra" />
+      <PropertyRef Name="IdComprador" />
     </Key>
-    <Property Name="IdDetalheCompra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <NavigationProperty Name="Compras" Relationship="DataModel.ComprasDetalheCompras" FromRole="DetalheCompras" ToRole="Compras" />
-    <Property Name="ComprasIdCompra" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Produto" Relationship="DataModel.DetalheComprasProduto" FromRole="DetalheCompras" ToRole="Produto" />
+    <Property Name="IdComprador" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NomeComprador" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Compras" Relationship="DataModel.ComprasComprador" FromRole="Comprador" ToRole="Compras" />
   </EntityType>
-  <Association Name="ComprasDetalheCompras">
+  <Association Name="FK_ComprasDetalheCompras">
     <End Type="DataModel.Compras" Role="Compras" Multiplicity="1" />
     <End Type="DataModel.DetalheCompras" Role="DetalheCompras" Multiplicity="*" />
     <ReferentialConstraint>
@@ -104,7 +80,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="DetalheComprasProduto">
+  <Association Name="FK_DetalheComprasProduto">
     <End Type="DataModel.DetalheCompras" Role="DetalheCompras" Multiplicity="1" />
     <End Type="DataModel.Produto" Role="Produto" Multiplicity="*" />
     <ReferentialConstraint>
@@ -113,6 +89,30 @@
       </Principal>
       <Dependent Role="Produto">
         <PropertyRef Name="DetalheComprasIdDetalheCompra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FornecedorProduto">
+    <End Type="DataModel.Fornecedor" Role="Fornecedor" Multiplicity="1" />
+    <End Type="DataModel.Produto" Role="Produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fornecedor">
+        <PropertyRef Name="IdFornecedor" />
+      </Principal>
+      <Dependent Role="Produto">
+        <PropertyRef Name="FornecedorIdFornecedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ComprasComprador">
+    <End Type="DataModel.Compras" Role="Compras" Multiplicity="*" />
+    <End Type="DataModel.Comprador" Role="Comprador" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Comprador">
+        <PropertyRef Name="IdComprador" />
+      </Principal>
+      <Dependent Role="Compras">
+        <PropertyRef Name="ComprasIdComprador" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

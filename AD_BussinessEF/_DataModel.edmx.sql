@@ -56,7 +56,7 @@ GO
 
 -- Creating table 'Comprador'
 CREATE TABLE [dbo].[Comprador] (
-    [IdCoprador] int IDENTITY(1,1) NOT NULL,
+    [IdComprador] int IDENTITY(1,1) NOT NULL,
     [NomeComprador] nvarchar(max)  NOT NULL
 );
 GO

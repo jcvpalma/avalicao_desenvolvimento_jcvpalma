@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="AD_Database" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\v11.0;AttachDbFilename=&quot;C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AvaliacaoDesenv\App_Data\AD_Database.mdf&quot;;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="AD_DatabaseConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Comprador" Member="Compradors">
+    <Type Name="Comprador">
+      <Column Name="IdCoprador" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NomeComprador" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

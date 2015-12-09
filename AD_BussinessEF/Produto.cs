@@ -19,7 +19,7 @@ namespace AD_BussinessEF
         public int FornecedorIdFornecedor { get; set; }
         public int DetalheComprasIdDetalheCompra { get; set; }
     
-        public virtual Fornecedor Fornecedor { get; set; }
         public virtual DetalheCompras DetalheCompras { get; set; }
+        public virtual Fornecedor Fornecedor { get; set; }
     }
 }

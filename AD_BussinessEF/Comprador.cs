@@ -14,14 +14,7 @@ namespace AD_BussinessEF
     
     public partial class Comprador
     {
-        public Comprador()
-        {
-            this.Compras = new HashSet<Compras>();
-        }
-    
-        public int IdCoprador { get; set; }
+        public int IdComprador { get; set; }
         public string NomeComprador { get; set; }
-    
-        public virtual ICollection<Compras> Compras { get; set; }
     }
 }

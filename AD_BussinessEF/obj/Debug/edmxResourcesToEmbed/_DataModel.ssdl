@@ -1,33 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="DataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="DataModelStoreContainer">
-    <EntitySet Name="Comprador" EntityType="DataModel.Store.Comprador" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Compras" EntityType="DataModel.Store.Compras" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Fornecedor" EntityType="DataModel.Store.Fornecedor" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Produto" EntityType="DataModel.Store.Produto" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="DetalheCompras" EntityType="DataModel.Store.DetalheCompras" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="CompradorCompras" Association="DataModel.Store.CompradorCompras">
-      <End Role="Comprador" EntitySet="Comprador" />
-      <End Role="Compras" EntitySet="Compras" />
-    </AssociationSet>
-    <AssociationSet Name="FornecedorProduto" Association="DataModel.Store.FornecedorProduto">
-      <End Role="Fornecedor" EntitySet="Fornecedor" />
-      <End Role="Produto" EntitySet="Produto" />
-    </AssociationSet>
-    <AssociationSet Name="ComprasDetalheCompras" Association="DataModel.Store.ComprasDetalheCompras">
-      <End Role="Compras" EntitySet="Compras" />
-      <End Role="DetalheCompras" EntitySet="DetalheCompras" />
-    </AssociationSet>
-    <AssociationSet Name="DetalheComprasProduto" Association="DataModel.Store.DetalheComprasProduto">
-      <End Role="DetalheCompras" EntitySet="DetalheCompras" />
-      <End Role="Produto" EntitySet="Produto" />
-    </AssociationSet>
-  </EntityContainer>
+<Schema Namespace="DataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'E8EA1358223A251C65B78D7074E5B9FE_STUDIO 2013\PROJECTS\AVALICAO_DESENVOLVIMENTO_JCVPALMA\AVALIACAODESENV\APP_DATA\AD_DATABASE.MDF.dbo.Comprador' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Comprador">
     <Key>
-      <PropertyRef Name="IdCoprador" />
+      <PropertyRef Name="IdComprador" />
     </Key>
-    <Property Name="IdCoprador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdComprador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="NomeComprador" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Compras">
@@ -35,7 +14,13 @@
       <PropertyRef Name="IdCompra" />
     </Key>
     <Property Name="IdCompra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CompradorIdCoprador" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DetalheCompras">
+    <Key>
+      <PropertyRef Name="IdDetalheCompra" />
+    </Key>
+    <Property Name="IdDetalheCompra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ComprasIdCompra" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Fornecedor">
     <Key>
@@ -53,40 +38,9 @@
     <Property Name="FornecedorIdFornecedor" Type="int" Nullable="false" />
     <Property Name="DetalheComprasIdDetalheCompra" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="DetalheCompras">
-    <Key>
-      <PropertyRef Name="IdDetalheCompra" />
-    </Key>
-    <Property Name="IdDetalheCompra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ComprasIdCompra" Type="int" Nullable="false" />
-  </EntityType>
-  <Association Name="CompradorCompras">
-    <End Role="Comprador" Type="DataModel.Store.Comprador" Multiplicity="1" />
-    <End Role="Compras" Type="DataModel.Store.Compras" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Comprador">
-        <PropertyRef Name="IdCoprador" />
-      </Principal>
-      <Dependent Role="Compras">
-        <PropertyRef Name="CompradorIdCoprador" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FornecedorProduto">
-    <End Role="Fornecedor" Type="DataModel.Store.Fornecedor" Multiplicity="1" />
-    <End Role="Produto" Type="DataModel.Store.Produto" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Fornecedor">
-        <PropertyRef Name="IdFornecedor" />
-      </Principal>
-      <Dependent Role="Produto">
-        <PropertyRef Name="FornecedorIdFornecedor" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="ComprasDetalheCompras">
-    <End Role="Compras" Type="DataModel.Store.Compras" Multiplicity="1" />
-    <End Role="DetalheCompras" Type="DataModel.Store.DetalheCompras" Multiplicity="*" />
+  <Association Name="FK_ComprasDetalheCompras">
+    <End Role="Compras" Type="Self.Compras" Multiplicity="1" />
+    <End Role="DetalheCompras" Type="Self.DetalheCompras" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Compras">
         <PropertyRef Name="IdCompra" />
@@ -96,9 +50,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="DetalheComprasProduto">
-    <End Role="DetalheCompras" Type="DataModel.Store.DetalheCompras" Multiplicity="1" />
-    <End Role="Produto" Type="DataModel.Store.Produto" Multiplicity="*" />
+  <Association Name="FK_DetalheComprasProduto">
+    <End Role="DetalheCompras" Type="Self.DetalheCompras" Multiplicity="1" />
+    <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="DetalheCompras">
         <PropertyRef Name="IdDetalheCompra" />
@@ -108,4 +62,40 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_FornecedorProduto">
+    <End Role="Fornecedor" Type="Self.Fornecedor" Multiplicity="1" />
+    <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fornecedor">
+        <PropertyRef Name="IdFornecedor" />
+      </Principal>
+      <Dependent Role="Produto">
+        <PropertyRef Name="FornecedorIdFornecedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DataModelStoreContainer">
+    <EntitySet Name="Compras" EntityType="Self.Compras" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalheCompras" EntityType="Self.DetalheCompras" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Fornecedor" EntityType="Self.Fornecedor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Produto" EntityType="Self.Produto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comprador" EntityType="Self.Comprador" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Comprador].[IdComprador] AS [IdComprador], 
+    [Comprador].[NomeComprador] AS [NomeComprador]
+    FROM [dbo].[Comprador] AS [Comprador]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_ComprasDetalheCompras" Association="Self.FK_ComprasDetalheCompras">
+      <End Role="Compras" EntitySet="Compras" />
+      <End Role="DetalheCompras" EntitySet="DetalheCompras" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalheComprasProduto" Association="Self.FK_DetalheComprasProduto">
+      <End Role="DetalheCompras" EntitySet="DetalheCompras" />
+      <End Role="Produto" EntitySet="Produto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FornecedorProduto" Association="Self.FK_FornecedorProduto">
+      <End Role="Fornecedor" EntitySet="Fornecedor" />
+      <End Role="Produto" EntitySet="Produto" />
+    </AssociationSet>
+  </EntityContainer>
 </Schema>

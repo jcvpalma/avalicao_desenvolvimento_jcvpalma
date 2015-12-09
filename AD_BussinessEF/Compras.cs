@@ -20,9 +20,7 @@ namespace AD_BussinessEF
         }
     
         public int IdCompra { get; set; }
-        public int CompradorIdCoprador { get; set; }
     
-        public virtual Comprador Comprador { get; set; }
         public virtual ICollection<DetalheCompras> DetalheCompras { get; set; }
     }
 }
