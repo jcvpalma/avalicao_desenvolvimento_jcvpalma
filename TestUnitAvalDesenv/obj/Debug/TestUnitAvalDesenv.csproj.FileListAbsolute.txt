@@ -1,3 +1,4 @@
+C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\TestUnitAvalDesenv\obj\Debug\TestUnitAvalDesenv.csprojResolveAssemblyReference.cache
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\TestUnitAvalDesenv\bin\Debug\TestUnitAvalDesenv.dll.config
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\TestUnitAvalDesenv\bin\Debug\TestUnitAvalDesenv.dll
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\TestUnitAvalDesenv\bin\Debug\TestUnitAvalDesenv.pdb
@@ -23,6 +24,5 @@ C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\TestUnitAvalDesenv\bin\Debug\System.Web.WebPages.Razor.xml
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\TestUnitAvalDesenv\bin\Debug\System.Web.WebPages.xml
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\TestUnitAvalDesenv\bin\Debug\System.Web.WebPages.Deployment.xml
-C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\TestUnitAvalDesenv\obj\Debug\TestUnitAvalDesenv.csprojResolveAssemblyReference.cache
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\TestUnitAvalDesenv\obj\Debug\TestUnitAvalDesenv.dll
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\TestUnitAvalDesenv\obj\Debug\TestUnitAvalDesenv.pdb

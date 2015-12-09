@@ -20,10 +20,22 @@ namespace AvaliacaoDesenv.Model
             _fornecedorRepository = _fornecedor;            
         }
 
-        public bool SalvarFornecedor(Fornecedor _fornecedor)
+        public bool existsFornecedor(string fornecedor)
         {
             bool retorno = false;
-            if (_fornecedor != null)
+
+            if (_fornecedorRepository.getAllBy(x => x.NomeFornecedor == fornecedor).Count() > 0)
+            {
+                retorno = true;
+            }
+            return retorno;
+        }
+
+
+        public bool Salvar(Fornecedor _fornecedor)
+        {
+            bool retorno = false;
+            if (_fornecedor != null && _fornecedor.IdFornecedor != null)
             {
                 Fornecedor newest = new Fornecedor();
 
@@ -37,9 +49,17 @@ namespace AvaliacaoDesenv.Model
             }
             else
             {
-
+                if (_fornecedorRepository.update(_fornecedor) > 0)
+                {
+                    retorno = true;
+                }
             }
             return retorno;
+        }
+
+        public Fornecedor getFornecedor(String _fornecedor)
+        {
+            return _fornecedorRepository.getOne(x => x.NomeFornecedor.Contains(_fornecedor));
         }
 
 

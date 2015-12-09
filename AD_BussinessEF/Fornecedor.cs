@@ -16,12 +16,12 @@ namespace AD_BussinessEF
     {
         public Fornecedor()
         {
-            this.Produto = new HashSet<Produto>();
+            this.Produtoes = new HashSet<Produto>();
         }
     
         public int IdFornecedor { get; set; }
         public string NomeFornecedor { get; set; }
     
-        public virtual ICollection<Produto> Produto { get; set; }
+        public virtual ICollection<Produto> Produtoes { get; set; }
     }
 }

@@ -76,13 +76,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compra.cs">
+      <DependentUpon>_DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Comprador.cs">
       <DependentUpon>_DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Compras.cs">
-      <DependentUpon>_DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DetalheCompras.cs">
+    <Compile Include="DetalheCompra.cs">
       <DependentUpon>_DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Fornecedor.cs">

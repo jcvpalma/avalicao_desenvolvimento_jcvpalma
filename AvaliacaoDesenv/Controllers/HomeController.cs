@@ -28,18 +28,17 @@ namespace AvaliacaoDesenv.Controllers
                 var oFile = Request.Files["oFile"];
                 string line;
 
-                var oFornecedor = new FornecedorDAO(new FornecedorRepositories());
-                var _fornecedorObject = new Fornecedor();
-
                 using (System.IO.StreamReader read = new System.IO.StreamReader(oFile.InputStream))
                 {
 
+                    #region --|COMPRADOR|--
                     string comprador = String.Empty;
                     string descricao = String.Empty;
-                    double precoUnitario = 0.0;
+                    decimal precoUnitario = 0;
                     int quantidade = 0;
                     string endereco = String.Empty;
                     string fornecedor = String.Empty;
+                    #endregion
 
                     while ((line = read.ReadLine()) != null)
                     {
@@ -49,13 +48,17 @@ namespace AvaliacaoDesenv.Controllers
 
                         if (!vetor[0].StartsWith("Comprador"))
                         {
-                            #region -- Compilar processo de negocios aqui
+                            #region -- Variaveis vindas do arquivo
                             comprador = vetor[0];//Comprador
                             descricao = vetor[1];//Descricao
-                            precoUnitario = double.Parse(vetor[2]);//Preco
+                            precoUnitario = decimal.Parse(vetor[2]);//Preco
                             quantidade = int.Parse(vetor[3]);//Quantidade
                             endereco = vetor[4];//Endereco
                             fornecedor = vetor[5];//Fornecedor
+
+                            //Abro o pedido de Compra
+                            Compra pedido = new Compra();
+                            DetalheCompra detPedido = new DetalheCompra();
 
                             //1. Insiro o Comprador Caso nao Exista
                             var oComprador = new CompradorDAO(new CompradorRepositories());
@@ -70,6 +73,50 @@ namespace AvaliacaoDesenv.Controllers
                                     throw new Exception("Nao foi possivel salvar o comprador!");
                                 }
                             }
+                            var __comprador = oComprador.getComprador(comprador);
+
+                            //2. Insiro o Fornecedor
+                            var oFornecedor = new FornecedorDAO(new FornecedorRepositories());
+                            var existFornecedor = oFornecedor.existsFornecedor(fornecedor);
+
+                            if (existFornecedor == false) 
+                            {
+                                Fornecedor novoFornecedor = new Fornecedor();
+                                novoFornecedor.NomeFornecedor = fornecedor;
+                                if (!oFornecedor.Salvar(novoFornecedor))
+                                {
+                                    throw new Exception("Nao foi possivel salvar o produto!");
+                                }
+                            }
+                            var __fornecedor = oFornecedor.getFornecedor(descricao);
+
+
+                            //3. Insiro o produto
+                            var oProduto = new ProdutoDAO(new ProdutoRepositories());
+                            var existProduto = oProduto.existsProduto(descricao);
+
+                            if (existProduto == false)
+                            {
+                                Produto novoProduto = new Produto();
+                                novoProduto.DescricaoProduto = descricao;
+                                novoProduto.ValorUnitario = precoUnitario;
+                                novoProduto.Fornecedor = __fornecedor;
+
+                                if (!oProduto.Salvar(novoProduto))
+                                {
+                                    throw new Exception("Nao foi possivel salvar o produto!");
+                                }
+                            }
+                            var __produto = oProduto.getProduto(descricao);
+
+                            //4. Alimento o Pedido e o Detalhe do Pedido
+
+                            detPedido.Produtoes.Add(__produto);
+                            detPedido.QtdeProdutoCompra = quantidade;
+
+                            pedido.Comprador = __comprador;
+                            pedido.DetalheCompras.Add(detPedido);
+                            pedido.DtCompra = new DateTime();
 
                             #endregion
                         }

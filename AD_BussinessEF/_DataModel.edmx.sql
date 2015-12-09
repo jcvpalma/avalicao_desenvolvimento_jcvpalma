@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/17/2015 22:25:59
--- Generated from EDMX file: c:\users\jcvpalma\documents\visual studio 2013\Projects\AvaliacaoDesenv\AD_BussinessEF\_DataModel.edmx
+-- Date Created: 12/09/2015 17:18:26
+-- Generated from EDMX file: C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AD_BussinessEF\_DataModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,17 +17,14 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_CompradorCompras]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Compras] DROP CONSTRAINT [FK_CompradorCompras];
-GO
-IF OBJECT_ID(N'[dbo].[FK_FornecedorProduto]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Produto] DROP CONSTRAINT [FK_FornecedorProduto];
-GO
 IF OBJECT_ID(N'[dbo].[FK_ComprasDetalheCompras]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[DetalheComprasSet] DROP CONSTRAINT [FK_ComprasDetalheCompras];
+    ALTER TABLE [dbo].[DetalheCompras] DROP CONSTRAINT [FK_ComprasDetalheCompras];
 GO
 IF OBJECT_ID(N'[dbo].[FK_DetalheComprasProduto]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Produto] DROP CONSTRAINT [FK_DetalheComprasProduto];
+    ALTER TABLE [dbo].[Produtos] DROP CONSTRAINT [FK_DetalheComprasProduto];
+GO
+IF OBJECT_ID(N'[dbo].[FK_FornecedorProduto]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Produtos] DROP CONSTRAINT [FK_FornecedorProduto];
 GO
 
 -- --------------------------------------------------
@@ -40,14 +37,14 @@ GO
 IF OBJECT_ID(N'[dbo].[Compras]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Compras];
 GO
+IF OBJECT_ID(N'[dbo].[DetalheCompras]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DetalheCompras];
+GO
 IF OBJECT_ID(N'[dbo].[Fornecedor]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Fornecedor];
 GO
-IF OBJECT_ID(N'[dbo].[Produto]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Produto];
-GO
-IF OBJECT_ID(N'[dbo].[DetalheComprasSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[DetalheComprasSet];
+IF OBJECT_ID(N'[dbo].[Produtos]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Produtos];
 GO
 
 -- --------------------------------------------------
@@ -64,7 +61,16 @@ GO
 -- Creating table 'Compras'
 CREATE TABLE [dbo].[Compras] (
     [IdCompra] int IDENTITY(1,1) NOT NULL,
-    [CompradorIdCoprador] int  NOT NULL
+    [DtCompra] datetime  NOT NULL,
+    [Comprador_IdComprador] int  NOT NULL
+);
+GO
+
+-- Creating table 'DetalheCompras'
+CREATE TABLE [dbo].[DetalheCompras] (
+    [IdDetalheCompra] int IDENTITY(1,1) NOT NULL,
+    [ComprasIdCompra] int  NOT NULL,
+    [QtdeProdutoCompra] int  NOT NULL
 );
 GO
 
@@ -75,19 +81,13 @@ CREATE TABLE [dbo].[Fornecedor] (
 );
 GO
 
--- Creating table 'Produto'
-CREATE TABLE [dbo].[Produto] (
+-- Creating table 'Produtos'
+CREATE TABLE [dbo].[Produtos] (
     [IdProduto] int IDENTITY(1,1) NOT NULL,
     [DescricaoProduto] nvarchar(max)  NOT NULL,
     [FornecedorIdFornecedor] int  NOT NULL,
-    [DetalheComprasIdDetalheCompra] int  NOT NULL
-);
-GO
-
--- Creating table 'DetalheCompras'
-CREATE TABLE [dbo].[DetalheCompras] (
-    [IdDetalheCompra] int IDENTITY(1,1) NOT NULL,
-    [ComprasIdCompra] int  NOT NULL
+    [DetalheComprasIdDetalheCompra] int  NOT NULL,
+    [ValorUnitario] decimal(18,0)  NOT NULL
 );
 GO
 
@@ -95,10 +95,10 @@ GO
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
 
--- Creating primary key on [IdCoprador] in table 'Comprador'
+-- Creating primary key on [IdComprador] in table 'Comprador'
 ALTER TABLE [dbo].[Comprador]
 ADD CONSTRAINT [PK_Comprador]
-    PRIMARY KEY CLUSTERED ([IdCoprador] ASC);
+    PRIMARY KEY CLUSTERED ([IdComprador] ASC);
 GO
 
 -- Creating primary key on [IdCompra] in table 'Compras'
@@ -107,57 +107,27 @@ ADD CONSTRAINT [PK_Compras]
     PRIMARY KEY CLUSTERED ([IdCompra] ASC);
 GO
 
--- Creating primary key on [IdFornecedor] in table 'Fornecedor'
-ALTER TABLE [dbo].[Fornecedor]
-ADD CONSTRAINT [PK_Fornecedor]
-    PRIMARY KEY CLUSTERED ([IdFornecedor] ASC);
-GO
-
--- Creating primary key on [IdProduto] in table 'Produto'
-ALTER TABLE [dbo].[Produto]
-ADD CONSTRAINT [PK_Produto]
-    PRIMARY KEY CLUSTERED ([IdProduto] ASC);
-GO
-
 -- Creating primary key on [IdDetalheCompra] in table 'DetalheCompras'
 ALTER TABLE [dbo].[DetalheCompras]
 ADD CONSTRAINT [PK_DetalheCompras]
     PRIMARY KEY CLUSTERED ([IdDetalheCompra] ASC);
 GO
 
+-- Creating primary key on [IdFornecedor] in table 'Fornecedor'
+ALTER TABLE [dbo].[Fornecedor]
+ADD CONSTRAINT [PK_Fornecedor]
+    PRIMARY KEY CLUSTERED ([IdFornecedor] ASC);
+GO
+
+-- Creating primary key on [IdProduto] in table 'Produtos'
+ALTER TABLE [dbo].[Produtos]
+ADD CONSTRAINT [PK_Produtos]
+    PRIMARY KEY CLUSTERED ([IdProduto] ASC);
+GO
+
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
-
--- Creating foreign key on [CompradorIdCoprador] in table 'Compras'
-ALTER TABLE [dbo].[Compras]
-ADD CONSTRAINT [FK_CompradorCompras]
-    FOREIGN KEY ([CompradorIdCoprador])
-    REFERENCES [dbo].[Comprador]
-        ([IdCoprador])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_CompradorCompras'
-CREATE INDEX [IX_FK_CompradorCompras]
-ON [dbo].[Compras]
-    ([CompradorIdCoprador]);
-GO
-
--- Creating foreign key on [FornecedorIdFornecedor] in table 'Produto'
-ALTER TABLE [dbo].[Produto]
-ADD CONSTRAINT [FK_FornecedorProduto]
-    FOREIGN KEY ([FornecedorIdFornecedor])
-    REFERENCES [dbo].[Fornecedor]
-        ([IdFornecedor])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_FornecedorProduto'
-CREATE INDEX [IX_FK_FornecedorProduto]
-ON [dbo].[Produto]
-    ([FornecedorIdFornecedor]);
-GO
 
 -- Creating foreign key on [ComprasIdCompra] in table 'DetalheCompras'
 ALTER TABLE [dbo].[DetalheCompras]
@@ -174,8 +144,8 @@ ON [dbo].[DetalheCompras]
     ([ComprasIdCompra]);
 GO
 
--- Creating foreign key on [DetalheComprasIdDetalheCompra] in table 'Produto'
-ALTER TABLE [dbo].[Produto]
+-- Creating foreign key on [DetalheComprasIdDetalheCompra] in table 'Produtos'
+ALTER TABLE [dbo].[Produtos]
 ADD CONSTRAINT [FK_DetalheComprasProduto]
     FOREIGN KEY ([DetalheComprasIdDetalheCompra])
     REFERENCES [dbo].[DetalheCompras]
@@ -185,8 +155,38 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_DetalheComprasProduto'
 CREATE INDEX [IX_FK_DetalheComprasProduto]
-ON [dbo].[Produto]
+ON [dbo].[Produtos]
     ([DetalheComprasIdDetalheCompra]);
+GO
+
+-- Creating foreign key on [FornecedorIdFornecedor] in table 'Produtos'
+ALTER TABLE [dbo].[Produtos]
+ADD CONSTRAINT [FK_FornecedorProduto]
+    FOREIGN KEY ([FornecedorIdFornecedor])
+    REFERENCES [dbo].[Fornecedor]
+        ([IdFornecedor])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_FornecedorProduto'
+CREATE INDEX [IX_FK_FornecedorProduto]
+ON [dbo].[Produtos]
+    ([FornecedorIdFornecedor]);
+GO
+
+-- Creating foreign key on [Comprador_IdComprador] in table 'Compras'
+ALTER TABLE [dbo].[Compras]
+ADD CONSTRAINT [FK_CompraComprador]
+    FOREIGN KEY ([Comprador_IdComprador])
+    REFERENCES [dbo].[Comprador]
+        ([IdComprador])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CompraComprador'
+CREATE INDEX [IX_FK_CompraComprador]
+ON [dbo].[Compras]
+    ([Comprador_IdComprador]);
 GO
 
 -- --------------------------------------------------

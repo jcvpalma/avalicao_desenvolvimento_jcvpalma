@@ -18,8 +18,9 @@ namespace AD_BussinessEF
         public string DescricaoProduto { get; set; }
         public int FornecedorIdFornecedor { get; set; }
         public int DetalheComprasIdDetalheCompra { get; set; }
+        public decimal ValorUnitario { get; set; }
     
-        public virtual DetalheCompras DetalheCompras { get; set; }
+        public virtual DetalheCompra DetalheCompra { get; set; }
         public virtual Fornecedor Fornecedor { get; set; }
     }
 }

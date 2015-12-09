@@ -28,6 +28,7 @@ c:\users\jcvpalma\documents\visual studio 2013\Projects\AvaliacaoDesenv\Avaliaca
 c:\users\jcvpalma\documents\visual studio 2013\Projects\AvaliacaoDesenv\AvaliacaoDesenv\bin\AD_BussinessEF.pdb
 c:\users\jcvpalma\documents\visual studio 2013\Projects\AvaliacaoDesenv\AvaliacaoDesenv\bin\AD_ContractRepos.pdb
 c:\users\jcvpalma\documents\visual studio 2013\Projects\AvaliacaoDesenv\AvaliacaoDesenv\bin\AD_Repositories.pdb
+C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AvaliacaoDesenv\obj\Debug\AvaliacaoDesenv.csprojResolveAssemblyReference.cache
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AvaliacaoDesenv\bin\AvaliacaoDesenv.dll.config
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AvaliacaoDesenv\bin\AvaliacaoDesenv.dll
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AvaliacaoDesenv\bin\AvaliacaoDesenv.pdb
@@ -55,6 +56,5 @@ C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AvaliacaoDesenv\bin\System.Web.WebPages.xml
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AvaliacaoDesenv\bin\System.Web.WebPages.Deployment.xml
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AvaliacaoDesenv\bin\System.Web.WebPages.Razor.xml
-C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AvaliacaoDesenv\obj\Debug\AvaliacaoDesenv.csprojResolveAssemblyReference.cache
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AvaliacaoDesenv\obj\Debug\AvaliacaoDesenv.dll
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AvaliacaoDesenv\obj\Debug\AvaliacaoDesenv.pdb

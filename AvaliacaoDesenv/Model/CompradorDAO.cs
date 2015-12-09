@@ -35,7 +35,7 @@ namespace AvaliacaoDesenv.Model
         public bool Salvar(Comprador _comprador)
         {
             bool retorno = false;
-            if (_comprador != null)
+            if (_comprador != null && _comprador.IdComprador != null)
             {
                 Comprador newest = new Comprador();
 
@@ -49,11 +49,18 @@ namespace AvaliacaoDesenv.Model
             }
             else
             {
-
+                if (_compradorRepository.update(_comprador) > 0)
+                {
+                    retorno = true;
+                }
             }
             return retorno;
         }
 
+        public Comprador getComprador(String _comprador)
+        {
+            return _compradorRepository.getOne(x => x.NomeComprador.Contains(_comprador));
+        }
 
         public void Dispose()
         {

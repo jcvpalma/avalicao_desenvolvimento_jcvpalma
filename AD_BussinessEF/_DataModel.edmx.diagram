@@ -5,14 +5,15 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="e52e0878567041a9a1ae1dc68922eea7" Name="Diagram1" >
-        <EntityTypeShape EntityType="DataModel.Compras" Width="2.125" PointX="0.5" PointY="1.125" />
-        <EntityTypeShape EntityType="DataModel.DetalheCompras" Width="2.625" PointX="1" PointY="3.125" />
+        <EntityTypeShape EntityType="DataModel.Comprador" Width="1.5" PointX="9.5" PointY="4.375" />
+        <EntityTypeShape EntityType="DataModel.Compra" Width="1.5" PointX="6.25" PointY="2.5" />
+        <EntityTypeShape EntityType="DataModel.DetalheCompra" Width="2" PointX="3.125" PointY="1" />
         <EntityTypeShape EntityType="DataModel.Fornecedor" Width="1.5" PointX="3" PointY="5.25" />
-        <EntityTypeShape EntityType="DataModel.Produto" Width="1.5" PointX="5.25" PointY="0.875" />
-        <EntityTypeShape EntityType="DataModel.Comprador" Width="1.5" PointX="7.5" PointY="1.5" />
+        <EntityTypeShape EntityType="DataModel.Produto" Width="1.5" PointX="9.375" PointY="0.5" />
         <AssociationConnector Association="DataModel.FK_ComprasDetalheCompras" />
         <AssociationConnector Association="DataModel.FK_DetalheComprasProduto" />
         <AssociationConnector Association="DataModel.FK_FornecedorProduto" />
+        <AssociationConnector Association="DataModel.CompraComprador" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

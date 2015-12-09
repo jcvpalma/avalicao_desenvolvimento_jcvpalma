@@ -14,9 +14,9 @@ namespace AvaliacaoDesenv.Model
     public class ComprasDAO : IDisposable
     {
 
-        IRepositorieBase<Compras> _comprasRepositorie;
+        IRepositorieBase<Compra> _comprasRepositorie;
 
-        public ComprasDAO(IRepositorieBase<Compras> _compras)
+        public ComprasDAO(IRepositorieBase<Compra> _compras)
         {
             this._comprasRepositorie = _compras;
         }

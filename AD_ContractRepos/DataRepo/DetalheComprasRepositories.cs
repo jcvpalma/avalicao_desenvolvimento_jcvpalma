@@ -9,7 +9,7 @@ using AD_Repositories;
 
 namespace AD_ContractRepos.DataRepo
 {
-    public class DetalheComprasRepositories : Repositorie<DataModelContainer, DetalheCompras>
+    public class DetalheComprasRepositories : Repositorie<DataModelContainer, DetalheCompra>
     {
     }
 }

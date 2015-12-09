@@ -1,46 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="DataModelStoreContainer" CdmEntityContainer="DataModelContainer">
+    <EntitySetMapping Name="Comprador">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Comprador)">
+        <MappingFragment StoreEntitySet="Comprador">
+          <ScalarProperty Name="IdComprador" ColumnName="IdComprador" />
+          <ScalarProperty Name="NomeComprador" ColumnName="NomeComprador" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Compras">
-      <EntityTypeMapping TypeName="DataModel.Compras">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Compra)">
         <MappingFragment StoreEntitySet="Compras">
           <ScalarProperty Name="IdCompra" ColumnName="IdCompra" />
+          <ScalarProperty Name="DtCompra" ColumnName="DtCompra" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DetalheCompras">
-      <EntityTypeMapping TypeName="DataModel.DetalheCompras">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.DetalheCompra)">
         <MappingFragment StoreEntitySet="DetalheCompras">
-          <ScalarProperty Name="ComprasIdCompra" ColumnName="ComprasIdCompra" />
           <ScalarProperty Name="IdDetalheCompra" ColumnName="IdDetalheCompra" />
+          <ScalarProperty Name="ComprasIdCompra" ColumnName="ComprasIdCompra" />
+          <ScalarProperty Name="QtdeProdutoCompra" ColumnName="QtdeProdutoCompra" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Fornecedor">
-      <EntityTypeMapping TypeName="DataModel.Fornecedor">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Fornecedor)">
         <MappingFragment StoreEntitySet="Fornecedor">
-          <ScalarProperty Name="NomeFornecedor" ColumnName="NomeFornecedor" />
           <ScalarProperty Name="IdFornecedor" ColumnName="IdFornecedor" />
+          <ScalarProperty Name="NomeFornecedor" ColumnName="NomeFornecedor" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Produto">
-      <EntityTypeMapping TypeName="DataModel.Produto">
-        <MappingFragment StoreEntitySet="Produto">
-          <ScalarProperty Name="DetalheComprasIdDetalheCompra" ColumnName="DetalheComprasIdDetalheCompra" />
-          <ScalarProperty Name="FornecedorIdFornecedor" ColumnName="FornecedorIdFornecedor" />
-          <ScalarProperty Name="DescricaoProduto" ColumnName="DescricaoProduto" />
+    <EntitySetMapping Name="Produtos">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Produto)">
+        <MappingFragment StoreEntitySet="Produtos">
           <ScalarProperty Name="IdProduto" ColumnName="IdProduto" />
+          <ScalarProperty Name="DescricaoProduto" ColumnName="DescricaoProduto" />
+          <ScalarProperty Name="FornecedorIdFornecedor" ColumnName="FornecedorIdFornecedor" />
+          <ScalarProperty Name="DetalheComprasIdDetalheCompra" ColumnName="DetalheComprasIdDetalheCompra" />
+          <ScalarProperty Name="ValorUnitario" ColumnName="ValorUnitario" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Comprador">
-      <EntityTypeMapping TypeName="DataModel.Comprador">
-        <MappingFragment StoreEntitySet="Comprador">
-          <ScalarProperty Name="NomeComprador" ColumnName="NomeComprador" />
-          <ScalarProperty Name="IdComprador" ColumnName="IdComprador" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
+    <AssociationSetMapping Name="CompraComprador" TypeName="DataModel.CompraComprador" StoreEntitySet="Compras">
+      <EndProperty Name="Comprador">
+        <ScalarProperty Name="IdComprador" ColumnName="Comprador_IdComprador" />
+      </EndProperty>
+      <EndProperty Name="Compra">
+        <ScalarProperty Name="IdCompra" ColumnName="IdCompra" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -1,7 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="DataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'E8EA1358223A251C65B78D7074E5B9FE_STUDIO 2013\PROJECTS\AVALICAO_DESENVOLVIMENTO_JCVPALMA\AVALIACAODESENV\APP_DATA\AD_DATABASE.MDF.dbo.Comprador' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+<Schema Namespace="DataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DataModelStoreContainer">
+    <EntitySet Name="Comprador" EntityType="DataModel.Store.Comprador" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Compras" EntityType="DataModel.Store.Compras" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DetalheCompras" EntityType="DataModel.Store.DetalheCompras" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Fornecedor" EntityType="DataModel.Store.Fornecedor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Produtos" EntityType="DataModel.Store.Produtos" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_ComprasDetalheCompras" Association="DataModel.Store.FK_ComprasDetalheCompras">
+      <End Role="Compra" EntitySet="Compras" />
+      <End Role="DetalheCompra" EntitySet="DetalheCompras" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalheComprasProduto" Association="DataModel.Store.FK_DetalheComprasProduto">
+      <End Role="DetalheCompra" EntitySet="DetalheCompras" />
+      <End Role="Produto" EntitySet="Produtos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FornecedorProduto" Association="DataModel.Store.FK_FornecedorProduto">
+      <End Role="Fornecedor" EntitySet="Fornecedor" />
+      <End Role="Produto" EntitySet="Produtos" />
+    </AssociationSet>
+    <AssociationSet Name="CompraComprador" Association="DataModel.Store.CompraComprador">
+      <End Role="Compra" EntitySet="Compras" />
+      <End Role="Comprador" EntitySet="Comprador" />
+    </AssociationSet>
+  </EntityContainer>
   <EntityType Name="Comprador">
     <Key>
       <PropertyRef Name="IdComprador" />
@@ -14,6 +35,8 @@ warning 6002: The table/view 'E8EA1358223A251C65B78D7074E5B9FE_STUDIO 2013\PROJE
       <PropertyRef Name="IdCompra" />
     </Key>
     <Property Name="IdCompra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DtCompra" Type="datetime" Nullable="false" />
+    <Property Name="Comprador_IdComprador" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="DetalheCompras">
     <Key>
@@ -21,6 +44,7 @@ warning 6002: The table/view 'E8EA1358223A251C65B78D7074E5B9FE_STUDIO 2013\PROJE
     </Key>
     <Property Name="IdDetalheCompra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ComprasIdCompra" Type="int" Nullable="false" />
+    <Property Name="QtdeProdutoCompra" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Fornecedor">
     <Key>
@@ -29,7 +53,7 @@ warning 6002: The table/view 'E8EA1358223A251C65B78D7074E5B9FE_STUDIO 2013\PROJE
     <Property Name="IdFornecedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="NomeFornecedor" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
-  <EntityType Name="Produto">
+  <EntityType Name="Produtos">
     <Key>
       <PropertyRef Name="IdProduto" />
     </Key>
@@ -37,24 +61,25 @@ warning 6002: The table/view 'E8EA1358223A251C65B78D7074E5B9FE_STUDIO 2013\PROJE
     <Property Name="DescricaoProduto" Type="nvarchar(max)" Nullable="false" />
     <Property Name="FornecedorIdFornecedor" Type="int" Nullable="false" />
     <Property Name="DetalheComprasIdDetalheCompra" Type="int" Nullable="false" />
+    <Property Name="ValorUnitario" Type="decimal" Nullable="false" />
   </EntityType>
   <Association Name="FK_ComprasDetalheCompras">
-    <End Role="Compras" Type="Self.Compras" Multiplicity="1" />
-    <End Role="DetalheCompras" Type="Self.DetalheCompras" Multiplicity="*" />
+    <End Role="Compra" Type="DataModel.Store.Compras" Multiplicity="1" />
+    <End Role="DetalheCompra" Type="DataModel.Store.DetalheCompras" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Compras">
+      <Principal Role="Compra">
         <PropertyRef Name="IdCompra" />
       </Principal>
-      <Dependent Role="DetalheCompras">
+      <Dependent Role="DetalheCompra">
         <PropertyRef Name="ComprasIdCompra" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_DetalheComprasProduto">
-    <End Role="DetalheCompras" Type="Self.DetalheCompras" Multiplicity="1" />
-    <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+    <End Role="DetalheCompra" Type="DataModel.Store.DetalheCompras" Multiplicity="1" />
+    <End Role="Produto" Type="DataModel.Store.Produtos" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="DetalheCompras">
+      <Principal Role="DetalheCompra">
         <PropertyRef Name="IdDetalheCompra" />
       </Principal>
       <Dependent Role="Produto">
@@ -63,8 +88,8 @@ warning 6002: The table/view 'E8EA1358223A251C65B78D7074E5B9FE_STUDIO 2013\PROJE
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_FornecedorProduto">
-    <End Role="Fornecedor" Type="Self.Fornecedor" Multiplicity="1" />
-    <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+    <End Role="Fornecedor" Type="DataModel.Store.Fornecedor" Multiplicity="1" />
+    <End Role="Produto" Type="DataModel.Store.Produtos" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Fornecedor">
         <PropertyRef Name="IdFornecedor" />
@@ -74,28 +99,16 @@ warning 6002: The table/view 'E8EA1358223A251C65B78D7074E5B9FE_STUDIO 2013\PROJE
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="DataModelStoreContainer">
-    <EntitySet Name="Compras" EntityType="Self.Compras" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalheCompras" EntityType="Self.DetalheCompras" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Fornecedor" EntityType="Self.Fornecedor" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Produto" EntityType="Self.Produto" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Comprador" EntityType="Self.Comprador" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [Comprador].[IdComprador] AS [IdComprador], 
-    [Comprador].[NomeComprador] AS [NomeComprador]
-    FROM [dbo].[Comprador] AS [Comprador]</DefiningQuery>
-    </EntitySet>
-    <AssociationSet Name="FK_ComprasDetalheCompras" Association="Self.FK_ComprasDetalheCompras">
-      <End Role="Compras" EntitySet="Compras" />
-      <End Role="DetalheCompras" EntitySet="DetalheCompras" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DetalheComprasProduto" Association="Self.FK_DetalheComprasProduto">
-      <End Role="DetalheCompras" EntitySet="DetalheCompras" />
-      <End Role="Produto" EntitySet="Produto" />
-    </AssociationSet>
-    <AssociationSet Name="FK_FornecedorProduto" Association="Self.FK_FornecedorProduto">
-      <End Role="Fornecedor" EntitySet="Fornecedor" />
-      <End Role="Produto" EntitySet="Produto" />
-    </AssociationSet>
-  </EntityContainer>
+  <Association Name="CompraComprador">
+    <End Role="Compra" Type="DataModel.Store.Compras" Multiplicity="*" />
+    <End Role="Comprador" Type="DataModel.Store.Comprador" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Comprador">
+        <PropertyRef Name="IdComprador" />
+      </Principal>
+      <Dependent Role="Compra">
+        <PropertyRef Name="Comprador_IdComprador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
