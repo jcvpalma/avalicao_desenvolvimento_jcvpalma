@@ -14,13 +14,17 @@ namespace AD_BussinessEF
     
     public partial class Produto
     {
+        public Produto()
+        {
+            this.DetalheCompras = new HashSet<DetalheCompra>();
+        }
+    
         public int IdProduto { get; set; }
         public string DescricaoProduto { get; set; }
         public int FornecedorIdFornecedor { get; set; }
-        public int DetalheComprasIdDetalheCompra { get; set; }
         public decimal ValorUnitario { get; set; }
     
-        public virtual DetalheCompra DetalheCompra { get; set; }
         public virtual Fornecedor Fornecedor { get; set; }
+        public virtual ICollection<DetalheCompra> DetalheCompras { get; set; }
     }
 }

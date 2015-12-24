@@ -23,6 +23,7 @@
           <ScalarProperty Name="IdDetalheCompra" ColumnName="IdDetalheCompra" />
           <ScalarProperty Name="ComprasIdCompra" ColumnName="ComprasIdCompra" />
           <ScalarProperty Name="QtdeProdutoCompra" ColumnName="QtdeProdutoCompra" />
+          <ScalarProperty Name="ProdutoIdProduto" ColumnName="ProdutoIdProduto" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -40,7 +41,6 @@
           <ScalarProperty Name="IdProduto" ColumnName="IdProduto" />
           <ScalarProperty Name="DescricaoProduto" ColumnName="DescricaoProduto" />
           <ScalarProperty Name="FornecedorIdFornecedor" ColumnName="FornecedorIdFornecedor" />
-          <ScalarProperty Name="DetalheComprasIdDetalheCompra" ColumnName="DetalheComprasIdDetalheCompra" />
           <ScalarProperty Name="ValorUnitario" ColumnName="ValorUnitario" />
         </MappingFragment>
       </EntityTypeMapping>

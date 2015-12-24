@@ -31,7 +31,6 @@ namespace AvaliacaoDesenv.Model
             return retorno;
         }
 
-
         public bool Salvar(Fornecedor _fornecedor)
         {
             bool retorno = false;
@@ -61,7 +60,6 @@ namespace AvaliacaoDesenv.Model
         {
             return _fornecedorRepository.getOne(x => x.NomeFornecedor.Contains(_fornecedor));
         }
-
 
         public void Dispose()
         {

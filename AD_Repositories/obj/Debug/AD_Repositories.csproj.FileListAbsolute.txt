@@ -21,10 +21,10 @@ c:\users\jcvpalma\documents\visual studio 2013\Projects\AvaliacaoDesenv\AD_Repos
 c:\users\jcvpalma\documents\visual studio 2013\Projects\AvaliacaoDesenv\AD_Repositories\bin\Debug\System.Web.WebPages.xml
 c:\users\jcvpalma\documents\visual studio 2013\Projects\AvaliacaoDesenv\AD_Repositories\bin\Debug\System.Web.WebPages.Deployment.xml
 c:\users\jcvpalma\documents\visual studio 2013\Projects\AvaliacaoDesenv\AD_Repositories\bin\Debug\System.Web.WebPages.Razor.xml
-C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AD_Repositories\bin\Debug\EntityFramework.dll
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AD_Repositories\bin\Debug\AD_Repositories.dll.config
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AD_Repositories\bin\Debug\AD_Repositories.dll
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AD_Repositories\bin\Debug\AD_Repositories.pdb
+C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AD_Repositories\bin\Debug\EntityFramework.dll
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AD_Repositories\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AD_Repositories\bin\Debug\Microsoft.Web.Infrastructure.dll
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AD_Repositories\bin\Debug\System.Linq.Dynamic.dll
@@ -42,6 +42,5 @@ C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AD_Repositories\bin\Debug\System.Web.WebPages.xml
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AD_Repositories\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AD_Repositories\bin\Debug\System.Web.WebPages.Razor.xml
-C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AD_Repositories\obj\Debug\AD_Repositories.csprojResolveAssemblyReference.cache
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AD_Repositories\obj\Debug\AD_Repositories.dll
 C:\Users\jcvpalma\Documents\Visual Studio 2013\Projects\avalicao_desenvolvimento_jcvpalma\AD_Repositories\obj\Debug\AD_Repositories.pdb

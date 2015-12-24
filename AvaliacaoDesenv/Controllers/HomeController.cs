@@ -48,81 +48,110 @@ namespace AvaliacaoDesenv.Controllers
 
                         if (!vetor[0].StartsWith("Comprador"))
                         {
-                            #region -- Variaveis vindas do arquivo
-                            comprador = vetor[0];//Comprador
-                            descricao = vetor[1];//Descricao
-                            precoUnitario = decimal.Parse(vetor[2]);//Preco
-                            quantidade = int.Parse(vetor[3]);//Quantidade
-                            endereco = vetor[4];//Endereco
-                            fornecedor = vetor[5];//Fornecedor
-
-                            //Abro o pedido de Compra
-                            Compra pedido = new Compra();
-                            DetalheCompra detPedido = new DetalheCompra();
-
-                            //1. Insiro o Comprador Caso nao Exista
-                            var oComprador = new CompradorDAO(new CompradorRepositories());
-                            var existComprador = oComprador.existsComprador(comprador);
-
-                            if (existComprador == false)
+                            try
                             {
-                                Comprador novoComprador = new Comprador();
-                                novoComprador.NomeComprador = comprador;
-                                if (!oComprador.Salvar(novoComprador))
+                                #region -- Variaveis vindas do arquivo
+                                comprador = vetor[0];//Comprador
+                                descricao = vetor[1];//Descricao
+                                precoUnitario = decimal.Parse(vetor[2]);//Preco
+                                quantidade = int.Parse(vetor[3]);//Quantidade
+                                endereco = vetor[4];//Endereco
+                                fornecedor = vetor[5];//Fornecedor
+                                #endregion
+
+                                #region -- | Laco de negocios
+
+                                //1. Insiro o Comprador Caso nao Exista
+                                var oComprador = new CompradorDAO(new CompradorRepositories());
+                                var existComprador = oComprador.existsComprador(comprador);
+
+                                if (existComprador == false)
                                 {
-                                    throw new Exception("Nao foi possivel salvar o comprador!");
+                                    Comprador novoComprador = new Comprador();
+                                    novoComprador.NomeComprador = comprador;
+                                    if (!oComprador.Salvar(novoComprador))
+                                    {
+                                        throw new Exception("Nao foi possivel salvar o comprador!");
+                                    }
                                 }
+                                var __comprador = oComprador.getComprador(comprador);
+
+                                //2. Insiro o Fornecedor
+                                var oFornecedor = new FornecedorDAO(new FornecedorRepositories());
+                                var existFornecedor = oFornecedor.existsFornecedor(fornecedor);
+
+                                if (existFornecedor == false) 
+                                {
+                                    Fornecedor novoFornecedor = new Fornecedor();
+                                    novoFornecedor.NomeFornecedor = fornecedor;
+                                    if (!oFornecedor.Salvar(novoFornecedor))
+                                    {
+                                        throw new Exception("Nao foi possivel salvar o produto!");
+                                    }
+                                }
+                                var __fornecedor = oFornecedor.getFornecedor(fornecedor);
+
+
+                                //3. Insiro o produto
+                                var oProduto = new ProdutoDAO(new ProdutoRepositories());
+                                var existProduto = oProduto.existsProduto(descricao);
+
+                                if (existProduto == false)
+                                {
+                                    Produto novoProduto = new Produto();
+                                    novoProduto.DescricaoProduto = descricao;
+                                    novoProduto.ValorUnitario = precoUnitario;
+                                    novoProduto.FornecedorIdFornecedor = __fornecedor.IdFornecedor;
+
+                                    if (!oProduto.Salvar(novoProduto))
+                                    {
+                                        throw new Exception("Nao foi possivel salvar o produto!");
+                                    }
+                                }
+                                var __produto = oProduto.getProduto(descricao);
+
+                                var oPedido = new ComprasDAO(new ComprasRepositories());
+                                Compra pedido = new Compra();
+
+                                pedido.Comprador = __comprador;
+                                pedido.DtCompra = DateTime.Now;
+
+                                var existPedidoAberto = oPedido.existsPedidoAberto(__fornecedor.IdFornecedor, __comprador.IdComprador, __produto.IdProduto);
+
+                                if (!oPedido.Salvar(pedido))
+                                {
+                                    throw new Exception("Nao foi possivel salvar o Pedido!");
+                                }
+                                var __pedido = oPedido.getPedido(__fornecedor.IdFornecedor, __comprador.IdComprador, __produto.IdProduto);
+
+
+                                //4. Alimento o Pedido e o Detalhe do Pedido
+                                DetalheCompra detPedido = new DetalheCompra();
+
+                                detPedido.ProdutoIdProduto = __produto.IdProduto;
+                                detPedido.Produto = __produto;
+                                detPedido.QtdeProdutoCompra = quantidade;
+                                detPedido.ComprasIdCompra = __pedido.IdCompra;
+                                detPedido.Compra = __pedido;
+
+                                var oDetCompras = new DetalheComprasDAO(new DetalheComprasRepositories());
+                                if (!oDetCompras.Salvar(detPedido))
+                                {
+                                    throw new Exception("Nao foi possivel salvar o Pedido!");
+                                }
+                                
+
+                                #endregion
                             }
-                            var __comprador = oComprador.getComprador(comprador);
-
-                            //2. Insiro o Fornecedor
-                            var oFornecedor = new FornecedorDAO(new FornecedorRepositories());
-                            var existFornecedor = oFornecedor.existsFornecedor(fornecedor);
-
-                            if (existFornecedor == false) 
+                            catch (Exception ex)
                             {
-                                Fornecedor novoFornecedor = new Fornecedor();
-                                novoFornecedor.NomeFornecedor = fornecedor;
-                                if (!oFornecedor.Salvar(novoFornecedor))
-                                {
-                                    throw new Exception("Nao foi possivel salvar o produto!");
-                                }
+                                sValores = ex.Message.ToString();
                             }
-                            var __fornecedor = oFornecedor.getFornecedor(descricao);
+                        
+                        }//Fim !columns
 
-
-                            //3. Insiro o produto
-                            var oProduto = new ProdutoDAO(new ProdutoRepositories());
-                            var existProduto = oProduto.existsProduto(descricao);
-
-                            if (existProduto == false)
-                            {
-                                Produto novoProduto = new Produto();
-                                novoProduto.DescricaoProduto = descricao;
-                                novoProduto.ValorUnitario = precoUnitario;
-                                novoProduto.Fornecedor = __fornecedor;
-
-                                if (!oProduto.Salvar(novoProduto))
-                                {
-                                    throw new Exception("Nao foi possivel salvar o produto!");
-                                }
-                            }
-                            var __produto = oProduto.getProduto(descricao);
-
-                            //4. Alimento o Pedido e o Detalhe do Pedido
-
-                            detPedido.Produtoes.Add(__produto);
-                            detPedido.QtdeProdutoCompra = quantidade;
-
-                            pedido.Comprador = __comprador;
-                            pedido.DetalheCompras.Add(detPedido);
-                            pedido.DtCompra = new DateTime();
-
-                            #endregion
-                        }
-
-                    }
-                }
+                    }//Fim while
+                }//Fim using
 
                 ViewData["valores"] = sValores;
 

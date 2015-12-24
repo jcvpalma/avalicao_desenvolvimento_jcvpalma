@@ -75,7 +75,14 @@ namespace AD_Repositories
         {
             if (objectEntity != null)
             {
-                DataContext.Set<T>().Add(objectEntity);
+                if (DataContext.Entry<T>(objectEntity).State == EntityState.Detached)
+                {
+                    DataContext.Set<T>().Attach(objectEntity);
+                }
+                else
+                {
+                    DataContext.Set<T>().Add(objectEntity);
+                }
                 return DataContext.SaveChanges();
             }
             throw new ArgumentNullException("A entidade DEVE ser passada no parametro.");
