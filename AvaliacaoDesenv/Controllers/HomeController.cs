@@ -16,6 +16,9 @@ namespace AvaliacaoDesenv.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            //TODO 1 Incluir o endereço na importacao da classe/model Comprador
+            //TODO 2 Alterar a rota para após concluir a importacao, recarregar a pagina inicial
+
             List<Model.ImportacaoModel> __importacao = new List<ImportacaoModel>();
 
             var _list = db.Compras.ToList();
