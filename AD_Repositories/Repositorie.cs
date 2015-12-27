@@ -79,10 +79,7 @@ namespace AD_Repositories
                 {
                     DataContext.Set<T>().Attach(objectEntity);
                 }
-                else
-                {
-                    DataContext.Set<T>().Add(objectEntity);
-                }
+                DataContext.Set<T>().Add(objectEntity);
                 return DataContext.SaveChanges();
             }
             throw new ArgumentNullException("A entidade DEVE ser passada no parametro.");

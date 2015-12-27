@@ -1,0 +1,27 @@
+﻿@model AD_BussinessEF.Comprador
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/_Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Comprador</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeComprador)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeComprador)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdComprador }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

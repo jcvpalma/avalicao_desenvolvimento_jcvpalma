@@ -56,9 +56,9 @@ namespace AvaliacaoDesenv.Model
             return retorno;
         }
 
-        public Compra getPedido(int idFornecedor, int idComprador, int idProduto)
+        public Compra getPedido(int idCompra)
         {
-            return _comprasRepositorie.getOne(x => (x.Comprador.IdComprador == idComprador && x.DetalheCompras.FirstOrDefault().ProdutoIdProduto == idProduto && x.DetalheCompras.FirstOrDefault().Produto.FornecedorIdFornecedor == idFornecedor));
+            return _comprasRepositorie.getOne(x => ( x.IdCompra == idCompra ));
         }
         public void Dispose()
         {

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<AD_BussinessEF.Fornecedor>
+
+@{
+    ViewBag.Title = "Fornecedores";
+    Layout = "~/Views/_Shared/_Layout.cshtml";
+}
+
+<h2>Manutenção de Fornecedores</h2>
+
+<p>@Html.ActionLink("Novo Fornecedor", "Create", new { Controller = "Fornecedor" }, new { Class="btn btn-default" })</p>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nome do Fornecedor
+            </th>
+            <th>Acoes</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeFornecedor)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.IdFornecedor }) |
+                    @Html.ActionLink("Detalhes", "Details", new { id = item.IdFornecedor }) |
+                    @Html.ActionLink("Excluir", "Delete", new { id = item.IdFornecedor })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@section styles {
+    <link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+}
+
+@section  Scripts {
+<script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+<script src="~/Scripts/DataTables/responsive.bootstrap.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".table").DataTable();
+    });
+</script>
+}

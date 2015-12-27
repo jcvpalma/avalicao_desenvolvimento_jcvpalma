@@ -1,0 +1,64 @@
+﻿@model IEnumerable<AD_BussinessEF.Produto>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/_Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Novo Produto", "Create", new { Controller = "Produtos" }, new { Class="btn btn-default"})
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Descricao do Produto
+            </th>
+            <th>
+                Valor Unitário
+            </th>
+            <th>
+               Nome do Fornecedor
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescricaoProduto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorUnitario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fornecedor.NomeFornecedor)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IdProduto }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.IdProduto }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdProduto })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section styles {
+    <link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+}
+
+@section  Scripts {
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+    <script src="~/Scripts/DataTables/responsive.bootstrap.js"></script>
+    <script>
+    $(document).ready(function () {
+        $(".table").DataTable();
+    });
+    </script>
+}

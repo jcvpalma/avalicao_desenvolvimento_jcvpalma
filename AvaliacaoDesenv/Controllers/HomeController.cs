@@ -12,10 +12,30 @@ namespace AvaliacaoDesenv.Controllers
 {
     public class HomeController : Controller
     {
+        private DataModelContainer db = new DataModelContainer();
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            List<Model.ImportacaoModel> __importacao = new List<ImportacaoModel>();
+
+            var _list = db.Compras.ToList();
+
+            foreach (var ped in _list)
+            {
+                var op = new Model.ImportacaoModel();
+
+                op.comprador = ped.Comprador.NomeComprador;
+                op.descricao = ped.DetalheCompras.LastOrDefault().Produto.DescricaoProduto;
+                op.precoUnitario = ped.DetalheCompras.LastOrDefault().Produto.ValorUnitario;
+                op.quantidade = ped.DetalheCompras.LastOrDefault().QtdeProdutoCompra;
+                op.endereco = "";
+                op.fornecedor = ped.DetalheCompras.LastOrDefault().Produto.Fornecedor.NomeFornecedor;
+
+                __importacao.Add(op);
+                
+            }
+
+            return View(__importacao.ToList());
         }
 
         [HttpPost()]
@@ -75,6 +95,7 @@ namespace AvaliacaoDesenv.Controllers
                                     }
                                 }
                                 var __comprador = oComprador.getComprador(comprador);
+                                oComprador.Dispose();
 
                                 //2. Insiro o Fornecedor
                                 var oFornecedor = new FornecedorDAO(new FornecedorRepositories());
@@ -90,6 +111,7 @@ namespace AvaliacaoDesenv.Controllers
                                     }
                                 }
                                 var __fornecedor = oFornecedor.getFornecedor(fornecedor);
+                                oFornecedor.Dispose();
 
 
                                 //3. Insiro o produto
@@ -109,7 +131,9 @@ namespace AvaliacaoDesenv.Controllers
                                     }
                                 }
                                 var __produto = oProduto.getProduto(descricao);
+                                oProduto.Dispose();
 
+                                //4. Alimento o Pedido e o Detalhe do Pedido
                                 var oPedido = new ComprasDAO(new ComprasRepositories());
                                 Compra pedido = new Compra();
 
@@ -118,28 +142,27 @@ namespace AvaliacaoDesenv.Controllers
 
                                 var existPedidoAberto = oPedido.existsPedidoAberto(__fornecedor.IdFornecedor, __comprador.IdComprador, __produto.IdProduto);
 
-                                if (!oPedido.Salvar(pedido))
+                                if (!oPedido.Salvar(pedido)) //&& !oDetCompras.Salvar(detPedido)
                                 {
                                     throw new Exception("Nao foi possivel salvar o Pedido!");
                                 }
-                                var __pedido = oPedido.getPedido(__fornecedor.IdFornecedor, __comprador.IdComprador, __produto.IdProduto);
+                                var __pedido = oPedido.getPedido(pedido.IdCompra);
+                                oPedido.Dispose();
 
-
-                                //4. Alimento o Pedido e o Detalhe do Pedido
+                                var oDetCompras = new DetalheComprasDAO(new DetalheComprasRepositories());
                                 DetalheCompra detPedido = new DetalheCompra();
 
                                 detPedido.ProdutoIdProduto = __produto.IdProduto;
                                 detPedido.Produto = __produto;
                                 detPedido.QtdeProdutoCompra = quantidade;
                                 detPedido.ComprasIdCompra = __pedido.IdCompra;
-                                detPedido.Compra = __pedido;
-
-                                var oDetCompras = new DetalheComprasDAO(new DetalheComprasRepositories());
                                 if (!oDetCompras.Salvar(detPedido))
                                 {
                                     throw new Exception("Nao foi possivel salvar o Pedido!");
                                 }
-                                
+                                oDetCompras.Dispose();
+
+                                sValores = "Pedido efetuado com sucesso!";
 
                                 #endregion
                             }

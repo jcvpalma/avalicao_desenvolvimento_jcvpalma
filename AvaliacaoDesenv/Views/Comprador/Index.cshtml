@@ -1,0 +1,49 @@
+﻿@model IEnumerable<AD_BussinessEF.Comprador>
+
+@{
+    ViewBag.Title = "Manutenação de Compradores";
+    Layout = "~/Views/_Shared/_Layout.cshtml";
+}
+
+<h2>Manutenação de Compradores</h2>
+
+<p>@Html.ActionLink("Novo Comprador", "Create", new { Controller = "Comprador" }, new { Class="btn btn-default" })</p>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome do Comprador</th>
+            <th>Acoes</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeComprador)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.IdComprador }) |
+                    @Html.ActionLink("Detalhes", "Details", new { id = item.IdComprador }) |
+                    @Html.ActionLink("Excluir", "Delete", new { id = item.IdComprador })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section styles {
+    <link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+}
+
+@section  Scripts {
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+    <script src="~/Scripts/DataTables/responsive.bootstrap.js"></script>
+    <script>
+    $(document).ready(function () {
+        $(".table").DataTable();
+    });
+    </script>
+}
